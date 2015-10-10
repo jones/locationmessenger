@@ -1,4 +1,5 @@
 package jain.locationmessenger;
+
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -23,8 +24,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
 
-
-
         // Search for the map fragment to finish setup by calling init().
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapfragment);
         mapFragment.init(new OnEngineInitListener() {
@@ -38,12 +37,17 @@ public class MainActivity extends Activity {
                     positioningManager.start(PositioningManager.LocationMethod.GPS_NETWORK);
                     GeoPosition geoPosition = positioningManager.getLastKnownPosition();
                     final GeoCoordinate geoCoordinate = geoPosition.getCoordinate();
+                    double latitude = geoCoordinate.getLatitude();
+                    double longitude = geoCoordinate.getLongitude();
+
+                    map.setZoomLevel(map.getMaxZoomLevel() + 2);
+                    map.setCenter(geoCoordinate, Map.Animation.LINEAR);
 
                     // Set the map center coordinate to the Vancouver region (no animation)
                     map.setCenter(geoCoordinate, Map.Animation.LINEAR);
                     //map.setCenter(new GeoCoordinate(49.196261, -123.004773, 0.0), Map.Animation.NONE);
                     // Set the map zoom level to the average between min and max (no animation)
-                    map.setZoomLevel((map.getMaxZoomLevel() + map.getMinZoomLevel()) / 2);
+                    //map.setZoomLevel((map.getMaxZoomLevel() + map.getMinZoomLevel()) / );
                 } else {
                     System.out.println("ERROR: Cannot initialize Map Fragment");
                 }
