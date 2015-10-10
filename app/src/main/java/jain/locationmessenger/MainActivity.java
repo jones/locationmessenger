@@ -33,32 +33,33 @@ public class MainActivity extends Activity {
     // map fragment embedded in this activity
     private MapFragment mapFragment = null;
 
-    private ListView listView;
-    private String android_id;
-    private ArrayList<String> names;
-    private ArrayList<String> ids;
-    private String name = "default";
-    private List<ParseObject> people;
-    private ParseObject person;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "aCAVE6xQKukRNC6JiMqoIAar2d7mp43TgV6UsWbt", "RipGECXNngnJuD9aXDhIKynjDqTbUkyNwylJXUsz");
-        ParseInstallation.getCurrentInstallation().saveInBackground();
-
+        // Search for the map fragment to finish setup by calling init().
+        mapFragment = (MapFragment)getFragmentManager().findFragmentById(
+                R.id.mapfragment);
+        mapFragment.init(new OnEngineInitListener() {
+            @Override
+            public void onEngineInitializationCompleted(
+                    OnEngineInitListener.Error error)
+            {
+                if (error == OnEngineInitListener.Error.NONE) {
+                    // retrieve a reference of the map from the map fragment
+                    map = mapFragment.getMap();
+                    // Set the map center to the Vancouver region (no animation)
+                    map.setCenter(new GeoCoordinate(49.196261, -123.004773, 0.0),
+                            Map.Animation.NONE);
+                    // Set the zoom level to the average between min and max
+                    map.setZoomLevel(
+                            (map.getMaxZoomLevel() + map.getMinZoomLevel()) / 2);
+                } else {
+                    System.out.println("ERROR: Cannot initialize Map Fragment");
+                }
+            }
+        });
     }
 
-    private void setup() {
-        person = new ParseObject("People");
-        person.put("location", android_id);
-        person.put("name", name);
-        person.put("requests", new ArrayList<String>());
-        person.saveInBackground();
-        ids.add(android_id);
-        names.add(name);
-    }
 }

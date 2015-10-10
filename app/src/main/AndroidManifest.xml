@@ -18,6 +18,8 @@
     <permission android:protectionLevel="signature"
         android:name="jain.shoutout.permission.C2D_MESSAGE" />
     <uses-permission android:name="jain.shoutout.permission.C2D_MESSAGE" />
+    <meta-data android:name="com.here.android.maps.license.key"
+        android:value="H4DbgfcenFH8Dc+QfYzyer2+SmpUO/i/jlKT7KQjFpujmK0iXyKUD1Odb5/WSqt8mFH3oRIECp1JC+ekBgzT9X0aCeEL/fovPKrkdFBJs7H2HQMtwtFRIAHMrpXg9PZHcOrB5fS7lTbd0528DPwk23FFA88ztU0slT9g7dii14fVWPrM+AbjJn7h2SM64w9+SFFaJ9zMLinjt0wyfiBt//iSBKJRzORvu2nBBwy0y360JZH5CJf91WhvcgF+gyinyJrvhMQ3zbPK1uEmNujcsApUfiaqOe0c+O+yMapPiCGQWuHigo3e9YIzUglamB8eA9SNNoBbbgOScn2W5vgzKHbak1kT2A/scozId71X6lerxzFaQ26RYZiSgmU9JOXUCnUvs0d9SdnBYeIcc2YlibSIqQsSdjjAbm63lypN//GFWG43kukaLhyCQkYoCiVzDosMzQ4Zr+ESEuHKZeDPVnT4TvH8PMsRNM43+Y3ECwCiFje2Td4jPF878eT9+9FwuZUPCdVh9bGkjjKP8f7MckchZfz1WagFUNZmr52ZmqAFLkBHgjex2me7+QxPyfXHibU+7/TITHbkWBrqVe6dTkF+uQifzWq7jIOcuiPE5lRV/zY8p5/tkxyCTQzVZlabGVeaxNS267+S9F3qV+jzHg0HLc9UbheIcUyVPN0wOew="/>
 
     <application
         android:allowBackup="true"
