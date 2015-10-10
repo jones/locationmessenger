@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
 
     private void setup() {
         person = new ParseObject("People");
-        person.put("droid", android_id);
+        person.put("location", android_id);
         person.put("name", name);
         person.put("requests", new ArrayList<String>());
         person.saveInBackground();
