@@ -22,9 +22,9 @@
   IMPORTANT: Change "com.parse.tutorials.pushnotifications.permission.C2D_MESSAGE" in the lines below
   to match your app's package name + ".permission.C2D_MESSAGE".
 -->
-    <permission android:protectionLevel="signature"
+    <!--<permission android:protectionLevel="signature"
         android:name="jain.shoutout.permission.C2D_MESSAGE" />
-    <uses-permission android:name="jain.shoutout.permission.C2D_MESSAGE" />
+    <uses-permission android:name="jain.shoutout.permission.C2D_MESSAGE" />-->
 
     <application
         android:allowBackup="true"
