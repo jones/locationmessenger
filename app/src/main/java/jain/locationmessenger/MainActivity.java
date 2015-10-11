@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
 
         android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-        Intent intent = new Intent(this, InterestsActivity.class);
+        Intent intent = new Intent(this, FriendsActivity.class);
         this.startActivity ( intent );
 
     }
@@ -120,12 +120,18 @@ public class MainActivity extends Activity {
         person.put("droid", android_id);
         person.put("name", name);
         person.put("lat", 3.2);
+        person.put("lon", 3.2);
 
         ArrayList<String> interests = new ArrayList<String>();
         interests.add("tennis");
         interests.add("soccer");
         person.put("interests", interests);
+        JSONObject friends = new JSONObject();
+        person.put("friends", friends);
+
         person.saveInBackground();
+
+
         ids.add(android_id);
         names.add(name);
     }

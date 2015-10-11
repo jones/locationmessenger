@@ -64,6 +64,10 @@
             android:name=".InterestsActivity"
             android:label="@string/title_activity_interests" >
         </activity>
+        <activity
+            android:name=".FriendsActivity"
+            android:label="@string/title_activity_friends" >
+        </activity>
     </application>
 
 </manifest>
