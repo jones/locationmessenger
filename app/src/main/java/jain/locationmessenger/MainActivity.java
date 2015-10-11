@@ -1,6 +1,7 @@
 package jain.locationmessenger;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -26,7 +27,11 @@ import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class MainActivity extends Activity {
@@ -51,35 +56,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
 
-        // Search for the map fragment to finish setup by calling init().
-        mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapfragment);
-        mapFragment.init(new OnEngineInitListener() {
-            @Override
-            public void onEngineInitializationCompleted(OnEngineInitListener.Error error) {
-                if (error == OnEngineInitListener.Error.NONE) {
-                    // retrieve a reference of the map from the map fragment
-                    map = mapFragment.getMap();
 
-                    PositioningManager positioningManager = PositioningManager.getInstance();
-                    positioningManager.start(PositioningManager.LocationMethod.GPS_NETWORK);
-                    GeoPosition geoPosition = positioningManager.getLastKnownPosition();
-                    final GeoCoordinate geoCoordinate = geoPosition.getCoordinate();
-                    double latitude = geoCoordinate.getLatitude();
-                    double longitude = geoCoordinate.getLongitude();
-
-                    map.setZoomLevel(map.getMaxZoomLevel() + 2);
-                    map.setCenter(geoCoordinate, Map.Animation.LINEAR);
-
-                    // Set the map center coordinate to the Vancouver region (no animation)
-                    map.setCenter(geoCoordinate, Map.Animation.LINEAR);
-                    //map.setCenter(new GeoCoordinate(49.196261, -123.004773, 0.0), Map.Animation.NONE);
-                    // Set the map zoom level to the average between min and max (no animation)
-                    //map.setZoomLevel((map.getMaxZoomLevel() + map.getMinZoomLevel()) / );
-                } else {
-                    System.out.println("ERROR: Cannot initialize Map Fragment");
-                }
-            }
-        });
 
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "gQPFmP5lp0JWuE0YsKLznIaxx1R7V2g4XHbmOXpp", "otoRe6CSRkEkY8N2NbsMY7veZskiCqOg2lJYiDox");
@@ -87,6 +64,8 @@ public class MainActivity extends Activity {
 
         android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
+        Intent intent = new Intent(this, InterestsActivity.class);
+        this.startActivity ( intent );
 
     }
 
@@ -103,9 +82,9 @@ public class MainActivity extends Activity {
             ids.add(droid);
             names.add(people.get(i).getString("name"));
         }
-        if(!presence){
+        /*if(!presence){
             setup();
-        }
+        }*/
         listView = (ListView) findViewById(R.id.list);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, names);
@@ -129,14 +108,23 @@ public class MainActivity extends Activity {
     public void connect(View view) {
         EditText getName = (EditText) findViewById(R.id.name);
         name = getName.getText().toString();
+        try {
+            setup();
+        } catch (Exception e){
+
+        };
     }
 
-    private void setup() {
+    private void setup() throws Exception{
         person = new ParseObject("People");
         person.put("droid", android_id);
         person.put("name", name);
         person.put("lat", 3.2);
-        person.put("long", 3.2);
+
+        ArrayList<String> interests = new ArrayList<String>();
+        interests.add("tennis");
+        interests.add("soccer");
+        person.put("interests", interests);
         person.saveInBackground();
         ids.add(android_id);
         names.add(name);

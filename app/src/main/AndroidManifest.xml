@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="jain.locationmessenger" >
-    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="17"/>
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -9,12 +12,17 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
 
     <application
         android:allowBackup="true"
@@ -30,21 +38,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data android:name="com.here.android.maps.appid" android:value="3eitBuXIn9PQFRleRTEh"/>
-        <meta-data android:name="com.here.android.maps.apptoken" android:value="kQd80CZX7ajKp32o0mfS9A"/>
-        <meta-data android:name="com.here.android.maps.license.key"
-            android:value="XxQNm5Q4sUZ1RT73rsoPHgC02aNtMnoXbhOqtyJKzcIXNzup0j8xkxNYFcXCwAbgaECd2uxaViS+BM4YX33SiNjjDjSB6jF8DdKt7O/VEicCmA/7Pa9XQCOUPXsqmnEpa9+ctHKrlgnih85llw9zWKMGifYjubJm0JfM8wNHWHfnzElVy1gEU1b97+WK3zJcArrunwdUZh/d9PnpSxBhEK9duO7NXCDRZeK14EG43IAiEE6BcVHAZhr/Yu9TTRo1FveU8SwwSPdffWtd2QlTa7bsKDFMCwf/5Oy5uJpmQvFAndfSivHps00uD6G3HHYiRedW6PU0st1FNRJkJSM4TtDgoJ6XWcgVqF0giczqD/pw0p6FRYOdTsSoOL0fr0JPfMODgb/Q3cVwmLr2nHZibbY5BxaPTXLv4QN7Ep3uE3yDRZduNX92BIdbGeNei/N9IzNy0pfSB8kT9luLm9UiCssf2Fiy/ZSx0Ed3xpMaf6fIREAhWbSTH3WsodTUHZr+MoBDuRAj0thpC8v2uAyw3ZTlqNNf34SFMmerFATdDxMGquwFPJzw7bQ4n+fqfwmkXhk5xbV8gV/vSvst0N9f2g5yi6+u7XHptACtoHNL10MYy1je53qapQVdFhbfIQ8VKSxMZQ1XaLtIwDLbcvx+sW42+vajTfEOGZlVVXlCYTI="/>
+
+        <meta-data
+            android:name="com.here.android.maps.appid"
+            android:value="3eitBuXIn9PQFRleRTEh" />
+        <meta-data
+            android:name="com.here.android.maps.apptoken"
+            android:value="kQd80CZX7ajKp32o0mfS9A" />
+        <meta-data
+            android:name="com.here.android.maps.license.key"
+            android:value="XxQNm5Q4sUZ1RT73rsoPHgC02aNtMnoXbhOqtyJKzcIXNzup0j8xkxNYFcXCwAbgaECd2uxaViS+BM4YX33SiNjjDjSB6jF8DdKt7O/VEicCmA/7Pa9XQCOUPXsqmnEpa9+ctHKrlgnih85llw9zWKMGifYjubJm0JfM8wNHWHfnzElVy1gEU1b97+WK3zJcArrunwdUZh/d9PnpSxBhEK9duO7NXCDRZeK14EG43IAiEE6BcVHAZhr/Yu9TTRo1FveU8SwwSPdffWtd2QlTa7bsKDFMCwf/5Oy5uJpmQvFAndfSivHps00uD6G3HHYiRedW6PU0st1FNRJkJSM4TtDgoJ6XWcgVqF0giczqD/pw0p6FRYOdTsSoOL0fr0JPfMODgb/Q3cVwmLr2nHZibbY5BxaPTXLv4QN7Ep3uE3yDRZduNX92BIdbGeNei/N9IzNy0pfSB8kT9luLm9UiCssf2Fiy/ZSx0Ed3xpMaf6fIREAhWbSTH3WsodTUHZr+MoBDuRAj0thpC8v2uAyw3ZTlqNNf34SFMmerFATdDxMGquwFPJzw7bQ4n+fqfwmkXhk5xbV8gV/vSvst0N9f2g5yi6+u7XHptACtoHNL10MYy1je53qapQVdFhbfIQ8VKSxMZQ1XaLtIwDLbcvx+sW42+vajTfEOGZlVVXlCYTI=" />
 
         <service
             android:name="com.here.android.mpa.service.MapService"
+            android:exported="true"
             android:label="HereMapService"
-            android:process="global.Here.Map.Service.v2"
-            android:exported="true" >
+            android:process="global.Here.Map.Service.v2" >
             <intent-filter>
                 <action android:name="com.here.android.mpa.service.MapService" >
                 </action>
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".InterestsActivity"
+            android:label="@string/title_activity_interests" >
+        </activity>
     </application>
 
 </manifest>
