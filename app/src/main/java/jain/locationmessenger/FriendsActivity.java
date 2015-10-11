@@ -119,7 +119,7 @@ public class FriendsActivity extends Activity {
                         thisGuy.saveInBackground();
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    }   
+                    }
                 }
             }
         });
