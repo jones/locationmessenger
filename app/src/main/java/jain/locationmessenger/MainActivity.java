@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
         AssetManager assetManager = getApplicationContext().getAssets();
         Bitmap bitmap = null;
         try {
-            bitmap = BitmapFactory.decodeStream(assetManager.open("pin.png"));
+            bitmap = BitmapFactory.decodeStream(assetManager.open("pin2.png"));
         } catch (Exception e) {
             System.out.println("should handle this");
             bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
@@ -47,6 +47,8 @@ public class MainActivity extends Activity {
             canvas.drawRect(0F, 0F, (float) 100, (float) 100, paint);
         }
         final Bitmap bitmap2 = bitmap;
+
+
 
 
 

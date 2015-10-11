@@ -11,12 +11,22 @@
         android:layout_height="wrap_content"
         android:text="@string/hello_world"
         tools:context=".MainActivity" />
+    <EditText
+        android:id="@+id/name"
+        android:hint="Your Name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="connect"
+        android:onClick="connect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-    <!-- Map Fragment embedded with the map object -->
-    <fragment
-        class="com.here.android.mpa.mapping.MapFragment"
-        android:id="@+id/mapfragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+
 
 </LinearLayout>
