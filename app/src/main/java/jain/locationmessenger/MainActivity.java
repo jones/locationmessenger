@@ -11,6 +11,12 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.here.android.mpa.common.GeoCoordinate;
 import com.here.android.mpa.common.GeoPosition;
 import com.here.android.mpa.common.OnEngineInitListener;
@@ -28,9 +34,21 @@ import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
+
+import java.net.URI;
+import java.net.URL;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
+
+import javax.net.ssl.HttpsURLConnection;
 
 
 public class MainActivity extends Activity {
@@ -40,6 +58,7 @@ public class MainActivity extends Activity {
     // map embedded in the map fragment
     private Map map = null;
     private volatile List<ParseObject> peopleList;
+    private RequestQueue queue;
 
 
     // map fragment embedded in this activity
@@ -49,6 +68,10 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        queue = Volley.newRequestQueue(this);
+
+
+        //getUberDistance(37.7759792, -122.41823, 37.868165, -122.268611);
 
 
         Parse.enableLocalDatastore(this);
@@ -218,6 +241,58 @@ public class MainActivity extends Activity {
                 }
             }
         });
+
+    }
+
+    private void getUberDistance(double lat1, double lon1, double lat2, double lon2) {
+
+
+        String url = "https://api.uber.com/v1/estimates/price/";
+        try {
+
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                    (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                        @Override
+                        public HashMap<String, String> getParams() {
+                            HashMap<String, String> params = new HashMap<String, String>();
+                            params.put("Authorization: Token", "aa2j6E7NRmCPiuc6C6Axzatwxc7cbJK0reBlchej");
+                            return params;
+                        }
+
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Toast.makeText(MainActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    }, new Response.ErrorListener() {
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // TODO Auto-generated method stub
+
+                        }
+                    });
+
+
+
+            HttpClient client = new DefaultHttpClient();
+            HttpGet get = new HttpGet();
+            get.setURI(new URI("https://api.uber.com/v1/estimates/price/"));
+            get.setHeader("Authorization", "Token aa2j6E7NRmCPiuc6C6Axzatwxc7cbJK0reBlchej");
+            get.getParams().setParameter("product_id", "a1111c8c-c720-46c3-8534-2fcdd730040d");
+            get.getParams().setParameter("start_latitude", String.valueOf(lat1));
+            get.getParams().setParameter("start_longitude", String.valueOf(lon1));
+            get.getParams().setParameter("end_latitude", String.valueOf(lat2));
+            get.getParams().setParameter("start_latitude", String.valueOf(lon2));
+            HttpResponse response = client.execute(get);
+
+            System.out.println("boo!");
+            if (response != null) {
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 }
