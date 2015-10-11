@@ -204,7 +204,7 @@ public class MainActivity extends Activity {
         AssetManager assetManager = getApplicationContext().getAssets();
         Bitmap bitmap = null;
         try {
-            bitmap = BitmapFactory.decodeStream(assetManager.open("pin2.png"));
+            bitmap = BitmapFactory.decodeStream(assetManager.open("greenco.png"));
         } catch (Exception e) {
             System.out.println("should handle this");
             bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
@@ -244,6 +244,18 @@ public class MainActivity extends Activity {
 
     }
 
+    private double getDistance(double lat1, double long1, double lat2, double long2)
+    {
+        double d2r = Math.PI / 180;
+        double dlong = (long2 - long1) * d2r;
+        double dlat = (lat2 - lat1) * d2r;
+        double a = Math.pow(Math.sin(dlat/2.0), 2) + Math.cos(lat1 * d2r) * Math.cos(lat2 * d2r) * Math.pow(Math.sin(dlong / 2.0), 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double d = 6367 * c;
+
+        return d;
+    }
+
     private void getUberDistance(double lat1, double lon1, double lat2, double lon2) {
 
 
@@ -252,10 +264,9 @@ public class MainActivity extends Activity {
 
             JsonObjectRequest jsObjRequest = new JsonObjectRequest
                     (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                        @Override
                         public HashMap<String, String> getParams() {
                             HashMap<String, String> params = new HashMap<String, String>();
-                            params.put("Authorization: Token", "aa2j6E7NRmCPiuc6C6Axzatwxc7cbJK0reBlchej");
+                            params.put("Authorization: Token", "aa2j6E7NRmCPiuc"+"6C6Axzatwxc7cbJK0reBlchej");
                             return params;
                         }
 
@@ -277,7 +288,7 @@ public class MainActivity extends Activity {
             HttpClient client = new DefaultHttpClient();
             HttpGet get = new HttpGet();
             get.setURI(new URI("https://api.uber.com/v1/estimates/price/"));
-            get.setHeader("Authorization", "Token aa2j6E7NRmCPiuc6C6Axzatwxc7cbJK0reBlchej");
+            get.setHeader("Authorization", "Token aa2j6E7NRmCPiuc6C6A"+"xzatwxc7cbJK0reBlchej");
             get.getParams().setParameter("product_id", "a1111c8c-c720-46c3-8534-2fcdd730040d");
             get.getParams().setParameter("start_latitude", String.valueOf(lat1));
             get.getParams().setParameter("start_longitude", String.valueOf(lon1));
